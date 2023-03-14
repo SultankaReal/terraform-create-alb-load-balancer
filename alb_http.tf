@@ -1,5 +1,3 @@
-#Link to terraform documentation - https://registry.tfpla.net/providers/yandex-cloud/yandex/latest/docs/resources/alb_load_balancer
-
 resource "yandex_alb_target_group" "click-target-group" {
   name      = "my-target-group"
 
@@ -29,6 +27,8 @@ resource "yandex_alb_backend_group" "click-backend-group" {
     healthcheck {
       timeout = "1s"
       interval = "1s"
+      healthy_threshold = 1
+      unhealthy_threshold = 1
       http_healthcheck {
         path  = "/ping"
       }
@@ -56,7 +56,7 @@ resource "yandex_alb_virtual_host" "my-virtual-host" {
 }
 
 resource "yandex_alb_load_balancer" "test-balancer" {
-  name        = "click-load-balancer"
+  name        = "click-load-balancer-http"
 
   network_id  = var.default_network_id
 
