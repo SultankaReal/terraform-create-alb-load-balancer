@@ -12,6 +12,3 @@ provider "yandex" {
   folder_id = var.default_folder_id
   zone      = var.default_zone
 }
-
-
-
